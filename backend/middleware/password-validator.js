@@ -7,7 +7,7 @@ validPassword
   .min(10)
   .max(35)
   .has()
-  .lowercase()
+  .lowercase() 
   .uppercase()
   .digits()
   .symbols();

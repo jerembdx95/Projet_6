@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require("express");
+const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -6,7 +8,6 @@ const path = require("path");
 const userRoutes = require("./routes/user");
 const sauceRoutes = require("./routes/sauce");
 
-// Connection à la base de données MongoDB
 mongoose.connect('mongodb+srv://jeremy_bdx95:whSHSa8B1U8qeY1B@cluster0-5aq6g.mongodb.net/<dbname>?retryWrites=true&w=majority'
 ,
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
@@ -14,6 +15,8 @@ mongoose.connect('mongodb+srv://jeremy_bdx95:whSHSa8B1U8qeY1B@cluster0-5aq6g.mon
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 const app = express();
+
+app.use(helmet()); // https://www.npmjs.com/package/helmet#how-it-works
 
 // Ajout de headers CORS à l'objet de réponse
 app.use((req, res, next) => {
@@ -25,6 +28,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.json()); // Transforme le corps de la requête en un objet JSON
 
+app.use("/images", express.static(path.join(__dirname, "images"))); // Autorise l'application à servir les fichiers statiques du dossier images
+
 // Routage
 app.use("/api/auth", userRoutes);
 app.use("/api/sauces", sauceRoutes);
+
+module.exports = app;
