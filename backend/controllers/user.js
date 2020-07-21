@@ -27,6 +27,7 @@ exports.signup = (req, res) => {
 exports.login = (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
+      console.log(user)
       if (!user) {
         return res.status(401).json({ message: "Utilisateur non trouvé !" });
       }
@@ -44,7 +45,10 @@ exports.login = (req, res) => {
             ),
           });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch(error => {
+          console.log(error)
+         return res.status(500).json({ error })
+        });
     })
     .catch(error => res.status(500).json({ error }));
 };

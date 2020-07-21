@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs");   // permet d'accéder au fichier image pour le supprimer //
 const Sauce = require("../models/sauce");
 
 // Crée une nouvelle sauce
@@ -11,7 +11,9 @@ exports.createSauce = (req, res) => {
   });
   sauce.save() // Enregistre la sauce dans la base de données
     .then(() => res.status(201).json({ message: "Sauce ajoutée !" }))
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => {
+      console.log(error)
+     return res.status(400).json({ error })});
 };
 
 // Récupère toutes les sauces
