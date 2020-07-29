@@ -4,7 +4,7 @@ const Sauce = require("../models/sauce");
 // Crée une nouvelle sauce
 exports.createSauce = (req, res) => {
   const sauceObject = JSON.parse(req.body.sauce);
-  delete sauceObject._id; // Supprime l'id généré automatiquement
+  delete sauceObject._id; // Supprime l'id généré automatiquement par le front
   const sauce = new Sauce({
     ...sauceObject,
     imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,

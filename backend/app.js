@@ -20,9 +20,9 @@ app.use(helmet()); // https://www.npmjs.com/package/helmet#how-it-works
 
 // Ajout de headers CORS à l'objet de réponse
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");  /* accéder à notre API depuis n'importe quelle origine ( '*' ) ;*/
   res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content, Accept, Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS"); /* d'envoyer des requêtes avec les méthodes mentionnées */
   next();
 });
 
